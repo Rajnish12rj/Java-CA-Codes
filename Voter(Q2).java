@@ -1,3 +1,5 @@
+/*Ashish-11810804*/
+
 /*2. Write a program to create a class Voter which contains attributes name, date_of_birth and voter_id and voter has a Voter_Card.
 Provide appropriate constructor to initialize all the attributes of the Voter but voter id must be assigned automatically
 only when the age of the voter is greater than or equal to 18 years. VoterCard is a nested class with attributes voter_id and Voter_name.
@@ -8,7 +10,6 @@ Make sure that voter card is created only when user is a valid voter and if it i
 import java.util.*;
 
 class Voter1 {
-
     String name;
     int age, voter_id;
     VoterCard1 v;
@@ -16,12 +17,11 @@ class Voter1 {
     Voter1(String name, int age, int voter_id) {
         this.name = name;
         this.age = age;
-        if ((age >= 18) && (voter_id == 0)) {
-            this.voter_id = (110 * age);
+        this.voter_id = voter_id;
+        if (age >= 18) {
+            if (voter_id == 0)
+                this.voter_id = age * 110;
             v = new VoterCard1(name, age);
-        } else {
-            v = new VoterCard1(name, age);
-            this.voter_id = voter_id;
         }
     }
 
@@ -33,11 +33,11 @@ class Voter1 {
             this.voter_name = voter_name;
             this.voter_id = voter_id;
         }
-
     }
 
     static void check_VoterCard(String name, ArrayList<Voter1> array) {
         boolean b1 = false;
+        String check = null;
         Iterator<Voter1> itr = array.iterator();
         while (itr.hasNext()) {
             Voter1 st = itr.next();
@@ -46,6 +46,7 @@ class Voter1 {
                 if (st.v.voter_name.equals(name)) {
                     System.out.println("So your name is " + st.v.voter_name + "\nYou have a voter card \nAnd your voter id is " + st.voter_id);
                     b1 = true;
+                    check = st.v.voter_name;
                 }
             }
         }
@@ -70,7 +71,7 @@ class Voter1 {
         array.add(ob5);
         array.add(ob6);
 
-        System.out.println("Enter your name :");
+        System.out.println("Enter your name : ");
         String s = s1.nextLine();
         check_VoterCard(s, array);
     }
